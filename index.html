@@ -1,0 +1,590 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <title>Para Shirley</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --accent: #f3a7bd;
+      --soft: #ffffffb8;
+    }
+
+    .page {
+      width: min(100%, 900px);
+      margin: 0 auto;
+      padding: 22px 18px 42px;
+    }
+
+    /* PORTADA */
+
+    .hero {
+      min-height: min(78svh, 760px);
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #222;
+      isolation: isolate;
+      box-shadow: 0 24px 70px #0009;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image: url("china.jpg");
+      background-size: cover;
+      background-position: center 35%;
+      transform: scale(1.015);
+      animation: appear 1.2s ease both;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,.02) 28%,
+        rgba(0,0,0,.18) 52%,
+        rgba(0,0,0,.82) 100%
+      );
+    }
+
+    .hero-content {
+      width: min(720px, 90%);
+      text-align: center;
+      padding: 0 12px 58px;
+      animation: rise .9s .15s ease both;
+    }
+
+    .eyebrow {
+      color: #ffffffc9;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 10px;
+      margin-bottom: 14px;
+    }
+
+    .name {
+      font: 400 clamp(52px, 10vw, 88px)/1 Georgia, 'Times New Roman', serif;
+      letter-spacing: -2px;
+      text-shadow: 0 3px 24px #0009;
+    }
+
+    .accent-line {
+      width: 48px;
+      height: 2px;
+      background: var(--accent);
+      margin: 20px auto 16px;
+      border-radius: 5px;
+    }
+
+    .dedication {
+      max-width: 440px;
+      margin: 0 auto;
+      color: #ffffffdf;
+      font: 17px/1.6 Georgia, 'Times New Roman', serif;
+      text-shadow: 0 2px 12px #000;
+    }
+
+    .scroll-note {
+      margin-top: 27px;
+      color: #ffffffb8;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-note span {
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-right: 1px solid var(--accent);
+      border-bottom: 1px solid var(--accent);
+      transform: rotate(45deg);
+      margin: 10px auto 0;
+    }
+
+    /* REPRODUCTOR MUSICAL */
+
+    .music-section {
+      padding: 22px 2px 0;
+    }
+
+    .music-heading {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 11px 5px;
+      color: #ffffffb8;
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    .music-heading::before {
+      content: "";
+      width: 18px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .music-card {
+      padding: 17px;
+      border: 1px solid #ffffff18;
+      border-radius: 17px;
+      background: linear-gradient(135deg, #191416, #101010 75%);
+      box-shadow: 0 14px 35px #0005;
+    }
+
+    .track-info {
+      margin-bottom: 14px;
+    }
+
+    .track-title {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .artist {
+      margin-top: 5px;
+      color: #ffffff8c;
+      font-size: 12px;
+    }
+
+    .audio-player {
+      display: block;
+      width: 100%;
+      height: 42px;
+      accent-color: #ffffff;
+    }
+
+    /* CARTA Y FIRMA */
+
+    .letter {
+      margin-top: 24px;
+      padding: 30px 22px;
+      text-align: center;
+      border: 1px solid #ffffff18;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #191416, #101010 75%);
+      box-shadow: 0 14px 35px #0005;
+      animation: rise 1s ease both;
+    }
+
+    .letter-decoration {
+      color: #ffffffb8;
+      font-size: 23px;
+      margin-bottom: 15px;
+    }
+
+    .letter-message {
+      color: #ffffffdf;
+      font: 19px/1.8 Georgia, 'Times New Roman', serif;
+      max-width: 510px;
+      margin: 0 auto;
+    }
+
+    .letter-line {
+      width: 42px;
+      height: 1px;
+      background: #ffffff40;
+      margin: 23px auto;
+    }
+
+    .signature-label {
+      color: #ffffff80;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+
+    .signature {
+      color: #ffffff;
+      font: 400 27px/1.4 Georgia, 'Times New Roman', serif;
+    }
+
+    .continued {
+      margin-top: 16px;
+      color: #ffffff80;
+      font: italic 13px Georgia, 'Times New Roman', serif;
+      letter-spacing: 1.5px;
+    }
+
+    /* GALERÍA DE RECUERDOS */
+
+    .gallery-section {
+      margin-top: 25px;
+      padding: 27px 18px;
+      border: 1px solid #ffffff18;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #191416, #101010 75%);
+      box-shadow: 0 14px 35px #0005;
+      text-align: center;
+      animation: rise 1s ease both;
+    }
+
+    .gallery-title {
+      color: #fff;
+      font: 400 27px/1.3 Georgia, 'Times New Roman', serif;
+      margin-bottom: 9px;
+    }
+
+    .gallery-subtitle {
+      color: #ffffff80;
+      font: italic 14px/1.6 Georgia, 'Times New Roman', serif;
+      margin-bottom: 23px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .gallery-frame {
+      aspect-ratio: 1 / 1;
+      border: 1px dashed #ffffff35;
+      border-radius: 13px;
+      background: linear-gradient(145deg, #191919, #111111);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      padding: 10px;
+      transition: background .3s ease, border-color .3s ease;
+    }
+
+    .gallery-frame:hover {
+      background: #1d1b1c;
+      border-color: #ffffff70;
+    }
+
+    .frame-icon {
+      color: #ffffff70;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .frame-text {
+      color: #ffffff80;
+      font: 12px/1.4 Georgia, 'Times New Roman', serif;
+    }
+
+    .gallery-closing {
+      margin-top: 26px;
+      color: #ffffffb8;
+      font: italic 16px/1.7 Georgia, 'Times New Roman', serif;
+    }
+
+    .gallery-final {
+      margin-top: 13px;
+      color: #fff;
+      font: 400 24px/1.4 Georgia, 'Times New Roman', serif;
+    }
+
+    /* PIE DE PÁGINA */
+
+    .footer {
+      padding: 25px 0 0;
+      text-align: center;
+      color: #ffffff58;
+      font: italic 12px Georgia, 'Times New Roman', serif;
+      letter-spacing: .3px;
+    }
+
+    /* ANIMACIONES */
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes appear {
+      from {
+        opacity: .5;
+        transform: scale(1.04);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1.015);
+      }
+    }
+
+    /* ADAPTACIÓN A MÓVILES */
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 12px 12px 30px;
+      }
+
+      .hero {
+        min-height: 76svh;
+        border-radius: 19px;
+      }
+
+      .hero-content {
+        padding-bottom: 43px;
+      }
+
+      .eyebrow {
+        letter-spacing: 3px;
+        font-size: 9px;
+      }
+
+      .dedication {
+        font-size: 15px;
+      }
+
+      .music-section {
+        padding-top: 18px;
+      }
+
+      .letter {
+        padding: 25px 17px;
+      }
+
+      .letter-message {
+        font-size: 17px;
+      }
+
+      .signature {
+        font-size: 24px;
+      }
+
+      .gallery-section {
+        padding: 23px 13px;
+      }
+
+      .gallery-title {
+        font-size: 24px;
+      }
+
+      .gallery-grid {
+        gap: 9px;
+      }
+
+      .frame-text {
+        font-size: 11px;
+      }
+
+      .gallery-final {
+        font-size: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <!-- PORTADA -->
+
+    <section class="hero" aria-label="Portada para Shirley">
+
+      <div class="hero-photo"
+           role="img"
+           aria-label="Fotografía de Shirley">
+      </div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+
+        <p class="eyebrow">
+          Agradecido por coincidir contigo. Gracias Dios
+          <br>
+          <br>
+          Feliz cumpleaños ❤️ 
+        </p>
+
+        <h1 class="name">Shirley</h1>
+
+        <div class="accent-line"></div>
+
+        <p class="dedication">
+          Que hoy la vida te regale razones bonitas para sonreír
+          y recuerdos que quieras guardar siempre.
+        </p>
+
+        <p class="scroll-note">
+          Te quiero mucho 
+          <span></span>
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- CANCIÓN -->
+
+    <section class="music-section" aria-label="Canción para Shirley">
+
+      <p class="music-heading">
+        Esta canción es para ti
+      </p>
+
+      <div class="music-card">
+
+        <div class="track-info">
+
+          <p class="track-title">
+            Tu jardín con enanitos
+          </p>
+
+          <p class="artist">
+            Melendi
+          </p>
+
+        </div>
+
+        <audio class="audio-player" controls preload="metadata">
+          <source src="Melendi.mp3" type="audio/mpeg">
+          Tu navegador no puede reproducir este archivo de audio.
+        </audio>
+
+      </div>
+
+    </section>
+
+    <!-- CARTA Y FIRMA -->
+
+    <section class="letter">
+
+      <div class="letter-decoration">🤍</div>
+
+      <p class="letter-message">
+        Prometo estar en tu próximo cumpleaños
+        y hacerlo especial.
+      </p>
+
+      <div class="letter-line"></div>
+
+      <p class="signature-label">
+        Con cariño,
+      </p>
+
+      <p class="signature">
+        Adam Gutierrez Rossell
+      </p>
+
+      <p class="continued">
+        Esta historia continuará...
+      </p>
+
+    </section>
+
+    <!-- GALERÍA DE RECUERDOS -->
+
+    <section class="gallery-section">
+
+      <h2 class="gallery-title">
+        
+      </h2>
+
+      <p class="gallery-subtitle">
+        Hay historias que apenas comienzan...
+      </p>
+
+      <div class="gallery-grid">
+
+        <div class="gallery-frame">
+          <span class="frame-icon">♡</span>
+          <p class="frame-text">
+            Nuestra primera salida
+            <br>cargando....
+          </p>
+        </div>
+
+        <div class="gallery-frame">
+          <span class="frame-icon">✧</span>
+          <p class="frame-text">
+            Nuestro primer baile....
+            <br>no hubo fotos pero jamás lo olvidaré...
+          </p>
+        </div>
+
+        <div class="gallery-frame">
+          <span class="frame-icon">♥</span>
+          <p class="frame-text">
+            Momentos por vivir
+          </p>
+        </div>
+
+        <div class="gallery-frame">
+          <span class="frame-icon">✦</span>
+          <p class="frame-text">
+            Una aventura por descubrir 
+          </p>
+        </div>
+
+      </div>
+
+      <p class="gallery-closing">
+        🤍
+        <br>
+        Tenemos mucho por descubrir, lugares por conocer, conversaciones por compartir y momentos que quizá algún día se conviertan en recuerdos. Por ahora, disfrutemos de esta bonita casualidad de habernos encontrado
+      </p>
+
+      <p class="gallery-final">
+        Este baile apenas comienza. 🤍
+      </p>
+
+    </section>
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer class="footer">
+      Hecho con cariño, especialmente para ti.
+    </footer>
+
+  </main>
+
+</body>
+</html>
